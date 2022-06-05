@@ -1,29 +1,27 @@
-import mysql.connector
+import cx_Oracle
 
-conn = mysql.connector.connect(
-    user="root",
-    password="",
-    host="localhost",
-    database="pbop12-2"
+conn = cx_Oracle.connect(
+    "python",
+    "python",
+    "127.0.0.1/XE"
 )
 
 cur = conn.cursor()
-
-cur.execute("SELECT * FROM pegawai")
+cur.execute("SELECT * FROM golongan")
 result = cur.fetchall()
 
 for row in result:
-  print('%s,%s,%s,%s,%s,%.0f' % (row[0],row[1],row[2],row[3],row[4],row[5]))
+  print('%s,%s,%.0f,%.0f,%.0f,%.0f,%.0f' % (row[0],row[1],row[2],row[3],row[4],row[5],row[6]))
 print("--------------")
 
-cur.execute('''DELETE FROM pegawai WHERE nip = %s''', ('AAA',))
+cur.execute('''DELETE FROM golongan WHERE kode_golongan = %s''', ('D3',))
 conn.commit()
 
-cur.execute("SELECT * FROM pegawai")
+cur.execute("SELECT * FROM golongan")
 result = cur.fetchall()
 
 for row in result:
-  print('%s,%s,%s,%s,%s,%.0f' % (row[0],row[1],row[2],row[3],row[4],row[5]))
+  print('%s,%s,%.0f,%.0f,%.0f,%.0f,%.0f' % (row[0],row[1],row[2],row[3],row[4],row[5],row[6]))
 
 cur.close()
 conn.close()

@@ -1,21 +1,22 @@
-import mysql.connector
+import cx_Oracle
 
-conn = mysql.connector.connect(
-    user="root",
-    password="",
-    host="localhost",
-    database="pbop12-2"
+conn = cx_Oracle.connect(
+    "python",   #username
+    "python",   #password
+    "127.0.0.1/XE"
 )
 
 cur = conn.cursor()
 sql='''
-    CREATE TABLE pegawai (
-      nip  VARCHAR(20) NOT NULL PRIMARY KEY,
-      nama_pegawai  VARCHAR(40),
-      kode_jabatan VARCHAR(3),
-      kode_golongan  VARCHAR(3),
-      status  VARCHAR(15),
-      jumlah_anak  INT(2))
+    CREATE TABLE golongan (
+      kode_golongan  VARCHAR(3) NOT NULL PRIMARY KEY,
+      nama_golongan  VARCHAR(10),
+      tunjangan_suami INT(10),
+      tunjangan_anak  INT(10),
+      uang_makan  INT(10),
+      uang_lembur  INT(10),
+      askes  INT(10)
+    )
       '''
 cur.execute(sql)
 cur.close()
